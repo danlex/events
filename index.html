@@ -473,7 +473,7 @@ const nextEv=events.filter(e=>e.e>=TODAY).sort((a,b)=>a.s-b.s)[0];
 const nextId=nextEv?nextEv.id:null;
 
 function rowEl(e){
-  const m=tmeta(e),dur=Math.round((e.e-e.s)/DAY)+1,isNext=e.id===nextId;
+  const di=dayInfo(e),m=tmeta(e),dur=Math.round((e.e-e.s)/DAY)+1,isNext=e.id===nextId;
   const r=document.createElement('article');
   r.className='row '+(e.win?'win':'other')+(isNext?' next':'')+(allOpen?' expanded':'');
   r.id='row-'+e.id; r.tabIndex=0; r.setAttribute('aria-label',e.name+', '+fmt(e)+', '+e.city);
@@ -484,6 +484,7 @@ function rowEl(e){
       <div class="rtitle"><img class="rlogo" src="${logoURL(e)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'em',textContent:'${m.emoji}'}))">${e.name}</div>
       <div class="rsub">📍 ${e.city}${e.venue?' · '+e.venue:''} &nbsp;·&nbsp; 🗓 ${fmt(e)} &nbsp;·&nbsp; <span class="ttag-mini" style="--c:${m.c}">${e.type}</span></div>
     </div>
+    <div class="rstatus"><span class="away ${di.cls}">${di.t}</span></div>
     <div class="ract">
       <button class="sbtn${isFav(e.id)?' on':''}" data-act="fav" aria-label="Save event">${isFav(e.id)?'★':'☆'}</button>
       <a class="sbtn" href="${gcal(e)}" target="_blank" rel="noopener" aria-label="Add to Google Calendar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></a>
