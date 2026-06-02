@@ -267,115 +267,93 @@ const WINDOW_END=new Date(TODAY); WINDOW_END.setDate(WINDOW_END.getDate()+30);
 const DAY=86400000;
 
 const events=[
-  { short:"IE 2026", name:"IE 2026 — Informatics in Economy", start:"2026-05-07", end:"2026-05-09",
-    city:"Bucharest", venue:"Bucharest University of Economic Studies (ASE)",
-    desc:"24th International Conference — Education, Research & Business Technologies. Academic IT & economics research with peer-reviewed sessions.",
-    tags:["Academic","Research","Informatics"], url:"https://www.conferenceie.ase.ro/" },
-  { short:"HackTM 2026", name:"HackTM 2026", start:"2026-05-11", end:"2026-05-16",
-    city:"Timișoara", venue:"FABER & partner coworking spaces",
-    desc:"Six-day hackathon with three tracks — Artificial Intelligence, Product Innovation and Defense Technologies. €6,000 total prize pool.",
-    tags:["Hackathon","AI","Defense Tech"], url:"https://hacktm.ro/" },
-  { short:"Romanian Creative Week", name:"Romanian Creative Week 2026", start:"2026-05-13", end:"2026-05-24",
-    city:"Iași", venue:"Citywide",
-    desc:"700+ events across the creative & tech industries, including the Creativity Conferences and the UniCredit Fintech Hackathon.",
-    tags:["Creative Tech","Fintech","Conferences"], url:"https://romaniancreativeweek.ro/en/" },
-  { short:"JSHeroes 2026", name:"JSHeroes 2026", start:"2026-05-14", end:"2026-05-15",
-    city:"Cluj-Napoca", venue:"Grand Hotel Italia",
-    desc:"Community-organized JavaScript conference — one of the most respected front-end and web engineering events in the region.",
-    tags:["JavaScript","Front-end","Web"], url:"https://jsheroes.io/" },
-  { short:"DIGIT-ABLE", name:"DIGIT-ABLE Hackathon", start:"2026-05-18", end:"2026-05-18",
-    city:"Iași", venue:"AGORA Center",
-    desc:"Social-impact hackathon combining social economy with digitalization and innovation.",
-    tags:["Hackathon","Social Impact"], url:"https://hackathon.alaturidevoi.ro/" },
-
-  { short:"DevTalks Romania", name:"DevTalks Romania 2026", start:"2026-06-03", end:"2026-06-04",
+  // CRON-CURATED LIST — each event is a self-contained object. type ∈ {Conference,Hackathon,Academic,Festival}.
+  { short:"DevTalks Romania", type:"Conference", name:"DevTalks Romania 2026", start:"2026-06-03", end:"2026-06-04",
     city:"Bucharest", venue:"Romexpo",
     desc:"The largest tech conference for developers, AI innovators & tech decision-makers in Central & Eastern Europe — 10,000+ attendees across multiple stages.",
     tags:["AI","Cloud","DevOps","Cybersecurity"], url:"https://www.devtalks.ro/" },
-  { short:"Dev.Play 2026", name:"Dev.Play 2026", start:"2026-06-08", end:"2026-06-09",
+  { short:"Dev.Play 2026", type:"Conference", name:"Dev.Play 2026", start:"2026-06-08", end:"2026-06-09",
     city:"Bucharest", venue:"Downtown Bucharest",
     desc:"Romania's leading game-development conference — indie, AAA, mobile and fundraising tracks bringing together studios, publishers and investors.",
     tags:["Game Dev","Design","Publishing"], url:"https://dev-play.ro/" },
-  { short:"Bucharest Tech Week", name:"Bucharest Tech Week — Business Summits", start:"2026-06-15", end:"2026-06-19",
+  { short:"Bucharest Tech Week", type:"Conference", name:"Bucharest Tech Week — Business Summits", start:"2026-06-15", end:"2026-06-19",
     city:"Bucharest", venue:"Nord Events Center by Globalworth",
     desc:"Five specialized summits: Innovation, Future AI, HR Masters, Software Architecture & AI Coding. Generative AI, AI agents and multi-cloud.",
     tags:["Generative AI","AI Agents","Architecture"], url:"https://www.techweek.ro/" },
-  { short:"Techsylvania 2026", name:"Techsylvania 2026", start:"2026-06-24", end:"2026-06-25",
+  { short:"Techsylvania 2026", type:"Conference", name:"Techsylvania 2026", start:"2026-06-24", end:"2026-06-25",
     city:"Cluj-Napoca", venue:"Cluj Innovation Park",
     desc:"Eastern Europe's leading tech & startup event — 2,000+ founders, investors and executives from 30+ countries across Center & Impact stages.",
     tags:["Startups","Venture","Leadership"], url:"https://techsylvania.com/" },
 
-  { short:"ECAI 2026", name:"ECAI 2026", start:"2026-07-02", end:"2026-07-03",
+  { short:"ECAI 2026", type:"Academic", name:"ECAI 2026", start:"2026-07-02", end:"2026-07-03",
     city:"Pitești", venue:"National University of Science and Technology",
     desc:"International Conference on Electronics, Computers and Artificial Intelligence — academic engineering & AI research.",
     tags:["Academic","AI","Electronics"], url:"https://10times.com/ecai-bucharest" },
 
-  { short:"ICSTCC 2026", name:"ICSTCC 2026 — System Theory, Control & Computing", start:"2026-10-21", end:"2026-10-24",
-    city:"Iași", venue:"IEEE Romania",
-    desc:"30th International Conference on System Theory, Control and Computing — IEEE-sponsored academic conference.",
-    tags:["Academic","Control","IEEE"], url:"https://icstcc.org/2026/" },
-  { short:"ICCP 2026", name:"ICCP 2026 — Intelligent Computer Communication", start:"2026-10-22", end:"2026-10-24",
-    city:"Cluj-Napoca", venue:"IEEE",
-    desc:"22nd IEEE International Conference on Intelligent Computer Communication and Processing.",
-    tags:["Academic","AI","IEEE"], url:"https://iccp.ro/iccp2026/" },
-
-  { short:"DevTalks Cluj 2026", name:"DevTalks Cluj-Napoca 2026", start:"2026-08-25", end:"2026-08-25",
+  { short:"DevTalks Cluj 2026", type:"Conference", name:"DevTalks Cluj-Napoca 2026", start:"2026-08-25", end:"2026-08-25",
     city:"Cluj-Napoca", venue:"Cluj-Napoca",
     desc:"Regional edition of DevTalks bringing developers, AI innovators and tech leaders together in Transylvania's tech capital.",
     tags:["AI","Cloud","DevOps"], url:"https://www.devtalks.ro/" },
-  { short:"devdays 2026", name:"devdays 2026", start:"2026-09-21", end:"2026-09-23",
-    city:"Iași", venue:"Iași",
-    desc:"Long-running developer conference in Iași — software craftsmanship, architecture and engineering practices.",
-    tags:["Software","Architecture","Web"], url:"https://dev.events/EU/RO/tech" },
-  { short:"Product Circle — Builders", name:"Product Circle — Builders (Bucharest)", start:"2026-10-03", end:"2026-10-03",
-    city:"Bucharest", venue:"Bucharest",
-    desc:"Community event for product builders — product management, discovery and growth.",
-    tags:["Product","Design","Growth"], url:"https://dev.events/EU/RO/tech" },
-  { short:"How to Web 2026", name:"How to Web 2026", start:"2026-10-06", end:"2026-10-08",
-    city:"Bucharest", venue:"Face Convention Center",
-    desc:"One of Central & Eastern Europe's most influential startup & tech conferences — founders, investors, product and AI leaders.",
-    tags:["Startups","Venture","Product","AI"], url:"https://www.howtoweb.co/" },
-  { short:"OmniOpenCon 2026", name:"OmniOpenCon 2026", start:"2026-10-17", end:"2026-10-19",
-    city:"Bucharest", venue:"Bucharest",
-    desc:"Open-source, open-data and open-knowledge community conference.",
-    tags:["Open Source","Community","Linux"], url:"https://dev.events/EU/RO/tech" },
-  { short:"Prow 2026", name:"Prow 2026", start:"2026-10-30", end:"2026-10-30",
-    city:"Timișoara", venue:"Timișoara",
-    desc:"Product & engineering conference in Timișoara.",
-    tags:["Product","Engineering"], url:"https://dev.events/EU/RO/tech" },
-  { short:"Product Circle — Cluj", name:"Product Circle — Builders (Cluj-Napoca)", start:"2026-11-07", end:"2026-11-07",
-    city:"Cluj-Napoca", venue:"Cluj-Napoca",
-    desc:"Cluj edition of the Product Circle community event for product builders.",
-    tags:["Product","Design","Growth"], url:"https://dev.events/EU/RO/tech" },
-  { short:"GoTech World 2026", name:"GoTech World 2026", start:"2026-11-10", end:"2026-11-11",
-    city:"Bucharest", venue:"Romexpo",
-    desc:"The largest B2B IT & digital business expo-conference in CEE (formerly Internet & Mobile World) — cloud, AI, e-commerce and digital transformation.",
-    tags:["IT","Cloud","AI","Digital"], url:"https://www.gotech.world/" },
-  { short:"DefCamp 2026", name:"DefCamp 2026", start:"2026-11-19", end:"2026-11-20",
-    city:"Bucharest", venue:"Bucharest",
-    desc:"The leading hacking & cybersecurity conference in Central & Eastern Europe — offensive security, research and live hacking village.",
-    tags:["Cybersecurity","Hacking","InfoSec"], url:"https://def.camp/" },
 
-  { short:"SYNASC 2026", name:"SYNASC 2026 — Symbolic & Numeric Algorithms", start:"2026-09-14", end:"2026-09-17",
+  { short:"SYNASC 2026", type:"Academic", name:"SYNASC 2026 — Symbolic & Numeric Algorithms", start:"2026-09-14", end:"2026-09-17",
     city:"Timișoara", venue:"West University of Timișoara",
     desc:"International Symposium on Symbolic and Numeric Algorithms for Scientific Computing — academic research in computing & HPC.",
     tags:["Academic","Algorithms","HPC"], url:"https://synasc.ro/2026/" },
-  { short:"IT Days 2026", name:"IT Days 2026", start:"2026-11-11", end:"2026-11-12",
+  { short:"devdays 2026", type:"Conference", name:"devdays 2026", start:"2026-09-21", end:"2026-09-23",
+    city:"Iași", venue:"Iași",
+    desc:"Long-running developer conference in Iași — software craftsmanship, architecture and engineering practices.",
+    tags:["Software","Architecture","Web"], url:"https://dev.events/EU/RO/tech" },
+
+  { short:"Product Circle — Builders", type:"Conference", name:"Product Circle — Builders (Bucharest)", start:"2026-10-03", end:"2026-10-03",
+    city:"Bucharest", venue:"Bucharest",
+    desc:"Community event for product builders — product management, discovery and growth.",
+    tags:["Product","Design","Growth"], url:"https://dev.events/EU/RO/tech" },
+  { short:"How to Web 2026", type:"Conference", name:"How to Web 2026", start:"2026-10-06", end:"2026-10-08",
+    city:"Bucharest", venue:"Face Convention Center",
+    desc:"One of Central & Eastern Europe's most influential startup & tech conferences — founders, investors, product and AI leaders.",
+    tags:["Startups","Venture","Product","AI"], url:"https://www.howtoweb.co/" },
+  { short:"OmniOpenCon 2026", type:"Conference", name:"OmniOpenCon 2026", start:"2026-10-17", end:"2026-10-19",
+    city:"Bucharest", venue:"Bucharest",
+    desc:"Open-source, open-data and open-knowledge community conference.",
+    tags:["Open Source","Community","Linux"], url:"https://dev.events/EU/RO/tech" },
+  { short:"ICSTCC 2026", type:"Academic", name:"ICSTCC 2026 — System Theory, Control & Computing", start:"2026-10-21", end:"2026-10-24",
+    city:"Iași", venue:"IEEE Romania",
+    desc:"30th International Conference on System Theory, Control and Computing — IEEE-sponsored academic conference.",
+    tags:["Academic","Control","IEEE"], url:"https://icstcc.org/2026/" },
+  { short:"ICCP 2026", type:"Academic", name:"ICCP 2026 — Intelligent Computer Communication", start:"2026-10-22", end:"2026-10-24",
+    city:"Cluj-Napoca", venue:"IEEE",
+    desc:"22nd IEEE International Conference on Intelligent Computer Communication and Processing.",
+    tags:["Academic","AI","IEEE"], url:"https://iccp.ro/iccp2026/" },
+  { short:"Prow 2026", type:"Conference", name:"Prow 2026", start:"2026-10-30", end:"2026-10-30",
+    city:"Timișoara", venue:"Timișoara",
+    desc:"Product & engineering conference in Timișoara.",
+    tags:["Product","Engineering"], url:"https://dev.events/EU/RO/tech" },
+
+  { short:"Product Circle — Cluj", type:"Conference", name:"Product Circle — Builders (Cluj-Napoca)", start:"2026-11-07", end:"2026-11-07",
+    city:"Cluj-Napoca", venue:"Cluj-Napoca",
+    desc:"Cluj edition of the Product Circle community event for product builders.",
+    tags:["Product","Design","Growth"], url:"https://dev.events/EU/RO/tech" },
+  { short:"GoTech World 2026", type:"Conference", name:"GoTech World 2026", start:"2026-11-10", end:"2026-11-11",
+    city:"Bucharest", venue:"Romexpo",
+    desc:"The largest B2B IT & digital business expo-conference in CEE (formerly Internet & Mobile World) — cloud, AI, e-commerce and digital transformation.",
+    tags:["IT","Cloud","AI","Digital"], url:"https://www.gotech.world/" },
+  { short:"IT Days 2026", type:"Conference", name:"IT Days 2026", start:"2026-11-11", end:"2026-11-12",
     city:"Cluj-Napoca", venue:"Cluj-Napoca",
     desc:"Annual IT conference in Cluj covering software development, cloud, AI, architecture and IT management.",
-    tags:["Software","Cloud","AI","Management"], url:"https://www.itdays.ro/" }
+    tags:["Software","Cloud","AI","Management"], url:"https://www.itdays.ro/" },
+  { short:"DefCamp 2026", type:"Conference", name:"DefCamp 2026", start:"2026-11-19", end:"2026-11-20",
+    city:"Bucharest", venue:"Bucharest",
+    desc:"The leading hacking & cybersecurity conference in Central & Eastern Europe — offensive security, research and live hacking village.",
+    tags:["Cybersecurity","Hacking","InfoSec"], url:"https://def.camp/" }
 ];
 
-const TYPES=['Academic','Hackathon','Festival','Conference','Hackathon','Conference','Conference','Conference','Conference','Academic','Academic','Academic',
-  'Conference','Conference','Conference','Conference','Conference','Conference','Conference','Conference','Conference',
-  'Academic','Conference'];
 const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);};
 const fmtMonth=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const fmt=e=>{const sm=fmtMonth[e.s.getMonth()],em=fmtMonth[e.e.getMonth()];
   if(e.start===e.end)return `${sm} ${e.s.getDate()}`;
   if(sm===em)return `${sm} ${e.s.getDate()}–${e.e.getDate()}`;
   return `${sm} ${e.s.getDate()} – ${em} ${e.e.getDate()}`;};
-events.forEach((e,i)=>{e.id="ev"+i;e.s=parse(e.start);e.e=parse(e.end);e.type=TYPES[i];e.win=e.e>=TODAY&&e.s<=WINDOW_END;});
+events.forEach((e,i)=>{e.id="ev"+i;e.s=parse(e.start);e.e=parse(e.end);e.type=e.type||"Conference";e.win=e.e>=TODAY&&e.s<=WINDOW_END;});
 const LIVE=events.filter(e=>e.e>=TODAY);   // upcoming only — drop events that have already ended
 
 const TYPEMETA={Conference:{emoji:'🎤',c:'#a78bfa'},Hackathon:{emoji:'⚡',c:'#fb923c'},Academic:{emoji:'🎓',c:'#38bdf8'},Festival:{emoji:'🎨',c:'#34d399'}};
@@ -489,7 +467,7 @@ function rowEl(e){
       <button class="sbtn${isFav(e.id)?' on':''}" data-act="fav" aria-label="Save event">${isFav(e.id)?'★':'☆'}</button>
       <a class="sbtn" href="${gcal(e)}" target="_blank" rel="noopener" aria-label="Add to Google Calendar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></a>
       <a class="sbtn" href="${e.url}" target="_blank" rel="noopener" aria-label="Event website">↗</a>
-      <button class="sbtn" data-act="toggle" aria-label="More details"><span class="chev">▾</span></button>
+      <button class="sbtn" data-act="toggle" aria-label="Expand details" title="Expand details"><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
     </div>
     <div class="row-more"><div class="row-more-in">
       <div class="desc">${e.desc}</div>
