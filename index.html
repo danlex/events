@@ -120,6 +120,7 @@
   .month-sep{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);
     display:flex;align-items:center;gap:10px;margin:18px 0 10px}
   .month-sep::after{content:"";flex:1;height:1px;background:var(--border)}
+  .month-sep .mcount{color:var(--muted);font-weight:600}
 
   /* Event rows */
   .list{display:flex;flex-direction:column;gap:10px}
@@ -235,11 +236,7 @@
     <button class="miniact" id="printbtn">🖨 Print</button>
   </div>
 
-  <div class="section-label" id="lbl-win">Next 30 days <span class="ct" id="ct-win"></span></div>
-  <div class="list" id="list-win"></div>
-
-  <div class="section-label" id="lbl-other">Later in 2026 <span class="ct" id="ct-other"></span></div>
-  <div class="list" id="list-other"></div>
+  <div class="list" id="list-all"></div>
 
   <div class="toast" id="toast"></div>
 
@@ -523,26 +520,25 @@ function rowEl(e){
   return r;
 }
 
-const winEl=document.getElementById('list-win'),otherEl=document.getElementById('list-other');
+const listEl=document.getElementById('list-all');
 function render(){
   const list=filtered();
   document.getElementById('searchClr').style.display=q?'flex':'none';
   document.getElementById('clear').style.display=anyFilter()?'inline-flex':'none';
   document.getElementById('resultHint').textContent=`${list.length} event${list.length!==1?'s':''}${anyFilter()?' match your filters':''}`;
   updateSavedBtn(); writeHash();
-  winEl.innerHTML=''; otherEl.innerHTML='';
-  const win=list.filter(e=>e.win), other=list.filter(e=>!e.win);
-  win.forEach((e,i)=>{const el=rowEl(e);el.style.animationDelay=(i*40)+'ms';winEl.appendChild(el);});
-  let cur=null,j=0;
-  other.forEach(e=>{const mk=e.s.getFullYear()+'-'+e.s.getMonth();
-    if(mk!==cur){cur=mk;const sep=document.createElement('div');sep.className='month-sep';sep.textContent=fmtMonth[e.s.getMonth()]+' '+e.s.getFullYear();otherEl.appendChild(sep);}
-    const el=rowEl(e);el.style.animationDelay=(j++*40)+'ms';otherEl.appendChild(el);});
-  document.getElementById('ct-win').textContent=win.length;
-  document.getElementById('ct-other').textContent=other.length;
-  document.getElementById('lbl-win').style.display=win.length?'flex':'none';
-  document.getElementById('lbl-other').style.display=other.length?'flex':'none';
-  if(!list.length){winEl.innerHTML='<div class="empty">No events match your filters. <b>Clear filters</b> or pick “All”.</div>';
-    document.getElementById('lbl-win').style.display='flex';document.getElementById('ct-win').textContent=0;}
+  listEl.innerHTML='';
+  if(!list.length){listEl.innerHTML='<div class=”empty”>No events match your filters. <b>Clear filters</b> or pick “All”.</div>';return;}
+  const groups={},order=[];
+  list.forEach(e=>{const mk=e.s.getFullYear()+'-'+e.s.getMonth();if(!groups[mk]){groups[mk]=[];order.push(mk);}groups[mk].push(e);});
+  let i=0;
+  order.forEach(mk=>{
+    const arr=groups[mk],m=arr[0].s;
+    const sep=document.createElement('div');sep.className='month-sep';
+    sep.innerHTML=`${fmtMonth[m.getMonth()]} ${m.getFullYear()} <span class=”mcount”>(${arr.length})</span>`;
+    listEl.appendChild(sep);
+    arr.forEach(e=>{const el=rowEl(e);el.style.animationDelay=(i++*40)+'ms';listEl.appendChild(el);});
+  });
 }
 
 function tickMini(){const el=document.getElementById('cd-mini');if(!el||!nextEv)return;
