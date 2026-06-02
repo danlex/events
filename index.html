@@ -3,7 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Romania Tech Events · 2026</title>
+<title>Upcoming Tech Events in Romania 2026 — Conferences, Hackathons & Summits</title>
+<meta name="description" content="The major upcoming technology events in Romania in 2026 — conferences, hackathons and summits including DevTalks, Techsylvania, How to Web, GoTech World and DefCamp, across Bucharest, Cluj-Napoca, Iași, Timișoara and Pitești. Filter by city or type, save a shortlist and sync to your calendar.">
+<meta name="keywords" content="Romania tech events 2026, tech conferences Romania, Bucharest tech events, Cluj-Napoca tech conference, DevTalks Romania, Techsylvania, How to Web, GoTech World, DefCamp, hackathons Romania, IT conferences Romania, AI conferences Romania">
+<meta name="author" content="alexandrudan.com">
+<link rel="canonical" href="https://events.alexandrudan.com/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#0b1020">
+<!-- Geo targeting -->
+<meta name="geo.region" content="RO">
+<meta name="geo.placename" content="Romania">
+<meta name="ICBM" content="44.4268, 26.1025">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Romania Tech Events 2026">
+<meta property="og:title" content="Upcoming Tech Events in Romania · 2026">
+<meta property="og:description" content="Major Romanian tech conferences, hackathons and summits in 2026 — DevTalks, Techsylvania, How to Web, GoTech World, DefCamp and more. Filter, save and sync to your calendar.">
+<meta property="og:url" content="https://events.alexandrudan.com/">
+<meta property="og:image" content="https://events.alexandrudan.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Upcoming Tech Events in Romania 2026">
+<meta property="og:locale" content="en_US">
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Upcoming Tech Events in Romania · 2026">
+<meta name="twitter:description" content="Major Romanian tech conferences, hackathons and summits in 2026 — DevTalks, Techsylvania, How to Web, GoTech World, DefCamp and more.">
+<meta name="twitter:image" content="https://events.alexandrudan.com/og-image.png">
+<!-- Icons -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
   :root{
     --bg-0:#0b1020; --bg-1:#0e1430;
@@ -177,8 +208,7 @@
       Romania · Tech Calendar 2026
     </div>
     <h1>Upcoming Tech Events <span class="grad">in Romania</span></h1>
-    <p class="sub">Major conferences, hackathons and summits — each row expands for full details. Save your shortlist, sync to your calendar, and share any filtered view.</p>
-    <div class="stats" id="stats"></div>
+    <noscript><p class="sub">Upcoming technology events in Romania in 2026 — conferences, hackathons and summits including DevTalks Romania (Jun 3–4, Bucharest), Dev.Play (Jun 8–9, Bucharest), Bucharest Tech Week (Jun 15–19), Techsylvania (Jun 24–25, Cluj-Napoca), How to Web (Oct 6–8, Bucharest), GoTech World (Nov 10–11, Bucharest) and DefCamp (Nov 19–20, Bucharest), across Bucharest, Cluj-Napoca, Iași, Timișoara and Pitești.</p></noscript>
   </header>
 
   <div class="sticky" id="sticky">
@@ -358,14 +388,19 @@ function dayInfo(e){ if(e.e<TODAY)return{t:'Passed',cls:'past'};
   if(e.s<=TODAY&&e.e>=TODAY)return{t:'Happening now',cls:'now'};
   const days=Math.round((e.s-TODAY)/DAY); return{t:days===0?'Today':days===1?'Tomorrow':'in '+days+' days',cls:'soon'}; }
 
-/* stats */
-(function(){const mc={};LIVE.forEach(e=>{mc[e.s.getMonth()]=(mc[e.s.getMonth()]||0)+1;});
-  let bm=-1,bn=0;for(const k in mc){if(mc[k]>bn){bn=mc[k];bm=+k;}}
-  document.getElementById('stats').innerHTML=`
-    <div class="stat"><b>${LIVE.length}</b><span>Upcoming</span></div>
-    <div class="stat"><b>${new Set(LIVE.map(e=>e.city)).size}</b><span>Cities</span></div>
-    <div class="stat"><b>${LIVE.filter(e=>e.win).length}</b><span>Next 30 days</span></div>
-    <div class="stat"><b>${fmtMonth[bm]} · ${bn}</b><span>Busiest month</span></div>`;})();
+/* SEO / GEO: emit schema.org structured data for search & AI answer engines */
+(function(){
+  const graph=[{"@type":"WebSite","name":"Romania Tech Events 2026","url":"https://events.alexandrudan.com/","inLanguage":"en"}];
+  LIVE.slice().sort((a,b)=>a.s-b.s).forEach(e=>{graph.push({
+    "@type":"Event","name":e.name,"startDate":e.start,"endDate":e.end,
+    "eventStatus":"https://schema.org/EventScheduled",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "location":{"@type":"Place","name":e.venue||e.city,"address":{"@type":"PostalAddress","addressLocality":e.city,"addressCountry":"RO"}},
+    "description":e.desc,"url":e.url});});
+  const s=document.createElement('script');s.type='application/ld+json';
+  s.textContent=JSON.stringify({"@context":"https://schema.org","@graph":graph});
+  document.head.appendChild(s);
+})();
 
 /* calendar links + export */
 const pad=n=>String(n).padStart(2,'0');
