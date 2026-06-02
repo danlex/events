@@ -1,0 +1,190 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Romania Tech Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Romania Tech Events
+X-WR-CALDESC:Upcoming technology events in Romania
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:devtalks-romania-20260603@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260603
+DTEND;VALUE=DATE:20260605
+SUMMARY:DevTalks Romania 2026
+LOCATION:Romexpo\, Bucharest\, Romania
+DESCRIPTION:The largest tech conference for developers\, AI innovators & tech decision-makers in Central & Eastern Europe — 10\,000+ attendees across multiple stages. https://www.devtalks.ro/
+URL:https://www.devtalks.ro/
+END:VEVENT
+BEGIN:VEVENT
+UID:dev-play-2026-20260608@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260608
+DTEND;VALUE=DATE:20260610
+SUMMARY:Dev.Play 2026
+LOCATION:Downtown Bucharest\, Bucharest\, Romania
+DESCRIPTION:Romania's leading game-development conference — indie\, AAA\, mobile and fundraising tracks bringing together studios\, publishers and investors. https://dev-play.ro/
+URL:https://dev-play.ro/
+END:VEVENT
+BEGIN:VEVENT
+UID:bucharest-tech-week-20260615@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260620
+SUMMARY:Bucharest Tech Week — Business Summits
+LOCATION:Nord Events Center by Globalworth\, Bucharest\, Romania
+DESCRIPTION:Five specialized summits: Innovation\, Future AI\, HR Masters\, Software Architecture & AI Coding. Generative AI\, AI agents and multi-cloud. https://www.techweek.ro/
+URL:https://www.techweek.ro/
+END:VEVENT
+BEGIN:VEVENT
+UID:techsylvania-2026-20260624@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260624
+DTEND;VALUE=DATE:20260626
+SUMMARY:Techsylvania 2026
+LOCATION:Cluj Innovation Park\, Cluj-Napoca\, Romania
+DESCRIPTION:Eastern Europe's leading tech & startup event — 2\,000+ founders\, investors and executives from 30+ countries across Center & Impact stages. https://techsylvania.com/
+URL:https://techsylvania.com/
+END:VEVENT
+BEGIN:VEVENT
+UID:ecai-2026-20260702@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260702
+DTEND;VALUE=DATE:20260704
+SUMMARY:ECAI 2026
+LOCATION:National University of Science and Technology\, Pitești\, Romania
+DESCRIPTION:International Conference on Electronics\, Computers and Artificial Intelligence — academic engineering & AI research. https://10times.com/ecai-bucharest
+URL:https://10times.com/ecai-bucharest
+END:VEVENT
+BEGIN:VEVENT
+UID:devtalks-cluj-2026-20260825@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260825
+DTEND;VALUE=DATE:20260826
+SUMMARY:DevTalks Cluj-Napoca 2026
+LOCATION:Cluj-Napoca\, Cluj-Napoca\, Romania
+DESCRIPTION:Regional edition of DevTalks bringing developers\, AI innovators and tech leaders together in Transylvania's tech capital. https://www.devtalks.ro/
+URL:https://www.devtalks.ro/
+END:VEVENT
+BEGIN:VEVENT
+UID:synasc-2026-20260914@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260914
+DTEND;VALUE=DATE:20260918
+SUMMARY:SYNASC 2026 — Symbolic & Numeric Algorithms
+LOCATION:West University of Timișoara\, Timișoara\, Romania
+DESCRIPTION:International Symposium on Symbolic and Numeric Algorithms for Scientific Computing — academic research in computing & HPC. https://synasc.ro/2026/
+URL:https://synasc.ro/2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:devdays-2026-20260921@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20260921
+DTEND;VALUE=DATE:20260924
+SUMMARY:devdays 2026
+LOCATION:Iași\, Iași\, Romania
+DESCRIPTION:Long-running developer conference in Iași — software craftsmanship\, architecture and engineering practices. https://dotnetdays.ro/
+URL:https://dotnetdays.ro/
+END:VEVENT
+BEGIN:VEVENT
+UID:product-circle-builders-20261003@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:Product Circle — Builders (Bucharest)
+LOCATION:Bucharest\, Bucharest\, Romania
+DESCRIPTION:Community event for product builders — product management\, discovery and growth. https://dev.events/EU/RO/tech
+URL:https://dev.events/EU/RO/tech
+END:VEVENT
+BEGIN:VEVENT
+UID:how-to-web-2026-20261006@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261006
+DTEND;VALUE=DATE:20261009
+SUMMARY:How to Web 2026
+LOCATION:Face Convention Center\, Bucharest\, Romania
+DESCRIPTION:One of Central & Eastern Europe's most influential startup & tech conferences — founders\, investors\, product and AI leaders. https://www.howtoweb.co/
+URL:https://www.howtoweb.co/
+END:VEVENT
+BEGIN:VEVENT
+UID:omniopencon-2026-20261017@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261020
+SUMMARY:OmniOpenCon 2026
+LOCATION:Bucharest\, Bucharest\, Romania
+DESCRIPTION:Open-source\, open-data and open-knowledge community conference. https://omniopencon.org/
+URL:https://omniopencon.org/
+END:VEVENT
+BEGIN:VEVENT
+UID:icstcc-2026-20261021@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261021
+DTEND;VALUE=DATE:20261025
+SUMMARY:ICSTCC 2026 — System Theory\, Control & Computing
+LOCATION:IEEE Romania\, Iași\, Romania
+DESCRIPTION:30th International Conference on System Theory\, Control and Computing — IEEE-sponsored academic conference. https://icstcc.org/2026/
+URL:https://icstcc.org/2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:iccp-2026-20261022@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261025
+SUMMARY:ICCP 2026 — Intelligent Computer Communication
+LOCATION:IEEE\, Cluj-Napoca\, Romania
+DESCRIPTION:22nd IEEE International Conference on Intelligent Computer Communication and Processing. https://iccp.ro/iccp2026/
+URL:https://iccp.ro/iccp2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:prow-2026-20261030@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261030
+DTEND;VALUE=DATE:20261031
+SUMMARY:Prow 2026
+LOCATION:Timișoara\, Timișoara\, Romania
+DESCRIPTION:Product & engineering conference in Timișoara. https://prow.ro/
+URL:https://prow.ro/
+END:VEVENT
+BEGIN:VEVENT
+UID:product-circle-cluj-20261107@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20261108
+SUMMARY:Product Circle — Builders (Cluj-Napoca)
+LOCATION:Cluj-Napoca\, Cluj-Napoca\, Romania
+DESCRIPTION:Cluj edition of the Product Circle community event for product builders. https://dev.events/EU/RO/tech
+URL:https://dev.events/EU/RO/tech
+END:VEVENT
+BEGIN:VEVENT
+UID:gotech-world-2026-20261110@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261112
+SUMMARY:GoTech World 2026
+LOCATION:Romexpo\, Bucharest\, Romania
+DESCRIPTION:The largest B2B IT & digital business expo-conference in CEE (formerly Internet & Mobile World) — cloud\, AI\, e-commerce and digital transformation. https://www.gotech.world/
+URL:https://www.gotech.world/
+END:VEVENT
+BEGIN:VEVENT
+UID:it-days-2026-20261111@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261113
+SUMMARY:IT Days 2026
+LOCATION:Cluj-Napoca\, Cluj-Napoca\, Romania
+DESCRIPTION:Annual IT conference in Cluj covering software development\, cloud\, AI\, architecture and IT management. https://www.itdays.ro/
+URL:https://www.itdays.ro/
+END:VEVENT
+BEGIN:VEVENT
+UID:defcamp-2026-20261119@events.alexandrudan.com
+DTSTAMP:20260602T194338Z
+DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261121
+SUMMARY:DefCamp 2026
+LOCATION:Bucharest\, Bucharest\, Romania
+DESCRIPTION:The leading hacking & cybersecurity conference in Central & Eastern Europe — offensive security\, research and live hacking village. https://def.camp/
+URL:https://def.camp/
+END:VEVENT
+END:VCALENDAR
