@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Romania Tech Events · 2026</title>
+<style>
+  :root{
+    --bg-0:#0b1020; --bg-1:#0e1430;
+    --surface:rgba(255,255,255,.045); --surface-2:rgba(255,255,255,.08);
+    --border:rgba(255,255,255,.09);
+    --ink:#f1f5f9; --muted:#9aa6c4; --faint:#6b7693;
+    --indigo:#818cf8; --indigo-2:#a78bfa; --amber:#fbbf24; --amber-2:#f59e0b; --emerald:#34d399;
+    --shadow:0 18px 40px -18px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);line-height:1.55;min-height:100vh;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(900px 500px at 12% -8%,rgba(129,140,248,.18),transparent 60%),
+      radial-gradient(900px 500px at 92% 0%,rgba(251,191,36,.10),transparent 55%),
+      linear-gradient(180deg,var(--bg-0),var(--bg-1));background-attachment:fixed}
+  .wrap{max-width:900px;margin:0 auto;padding:48px 24px 90px}
+  :focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:8px}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* Header */
+  header{margin-bottom:24px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .flag{display:inline-flex;border-radius:4px;overflow:hidden;box-shadow:0 0 0 1px var(--border)}
+  .flag span{width:7px;height:14px;display:block}
+  h1{font-size:clamp(2rem,4vw,2.9rem);line-height:1.05;font-weight:800;letter-spacing:-.03em}
+  h1 .grad{background:linear-gradient(100deg,var(--indigo),var(--indigo-2) 55%,var(--amber));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);margin-top:14px;font-size:1.06rem;max-width:62ch}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:9px 16px;backdrop-filter:blur(8px)}
+  .stat b{font-size:1.2rem;font-weight:800;display:block;letter-spacing:-.02em;line-height:1.15}
+  .stat span{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+  /* Sticky toolbar */
+  .sticky{position:sticky;top:0;z-index:40;padding:14px 0 10px;margin-bottom:8px;
+    background:linear-gradient(180deg,rgba(11,16,32,.94),rgba(11,16,32,.78));backdrop-filter:blur(12px);
+    border-bottom:1px solid transparent}
+  .sticky.stuck{border-bottom-color:var(--border)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+  .search{position:relative;flex:1;min-width:200px}
+  .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.5}
+  .search input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:11px 36px 11px 40px;color:var(--ink);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .15s,background .15s}
+  .search input::placeholder{color:var(--faint)}
+  .search input:focus{border-color:var(--indigo);background:var(--surface-2)}
+  .search .clr{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:none;
+    background:var(--surface-2);color:var(--muted);border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:.78rem}
+  .search .clr:hover{color:var(--ink)}
+  .toggle{display:inline-flex;align-items:center;gap:9px;cursor:pointer;font-size:.84rem;font-weight:600;color:var(--muted);user-select:none;white-space:nowrap}
+  .toggle input{position:absolute;opacity:0;width:0;height:0}
+  .switch{width:40px;height:22px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);position:relative;transition:background .18s;flex:none}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:transform .18s,background .18s}
+  .toggle input:checked + .switch{background:linear-gradient(90deg,var(--amber),var(--amber-2));border-color:transparent}
+  .toggle input:checked + .switch::after{transform:translateX(18px);background:#0b1020}
+  .toggle input:checked ~ .tlabel{color:var(--ink)}
+  .toggle input:focus-visible + .switch{outline:2px solid var(--indigo);outline-offset:2px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);align-self:center;margin-right:2px}
+  .fchip{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 14px;
+    font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s;font-family:inherit}
+  .fchip:hover{color:var(--ink);border-color:var(--surface-2)}
+  .fchip.on{background:var(--ink);color:var(--bg-0);border-color:var(--ink)}
+  #clear{color:var(--amber);border-color:rgba(251,191,36,.4)}
+
+  /* Section labels */
+  .bar-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:8px 0 4px}
+  .bar-actions .hint{font-size:.78rem;color:var(--faint);margin-right:auto}
+  .miniact{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600;color:var(--ink);
+    background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:6px 10px;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .12s}
+  .miniact:hover{border-color:var(--indigo);color:var(--indigo)}
+  .section-label{margin:26px 0 14px;display:flex;align-items:center;gap:12px;font-size:.78rem;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .section-label .ct{background:var(--surface-2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:1px 9px;font-size:.72rem}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--border)}
+  .month-sep{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);
+    display:flex;align-items:center;gap:10px;margin:18px 0 10px}
+  .month-sep::after{content:"";flex:1;height:1px;background:var(--border)}
+
+  /* Event rows */
+  .list{display:flex;flex-direction:column;gap:10px}
+  .row{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:14px 16px;border-radius:16px;
+    background:var(--surface);border:1px solid var(--border);cursor:pointer;overflow:hidden;
+    transition:transform .14s,border-color .14s,box-shadow .14s;animation:fadeup .4s both}
+  @keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .row:hover,.row:focus-visible{transform:translateY(-2px);border-color:var(--surface-2);box-shadow:var(--shadow)}
+  .row.expanded{border-color:var(--surface-2);box-shadow:var(--shadow)}
+  .row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .row.win::before{background:linear-gradient(180deg,var(--amber),var(--amber-2))}
+  .row.other::before{background:linear-gradient(180deg,var(--indigo),var(--indigo-2))}
+  .row.next{border-color:rgba(251,191,36,.5);box-shadow:0 0 0 1px rgba(251,191,36,.25)}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(251,191,36,.45)}100%{box-shadow:0 0 0 16px rgba(251,191,36,0)}}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(251,191,36,.6)}70%{box-shadow:0 0 0 7px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
+  .dtile{flex:none;width:52px;text-align:center;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:7px 0}
+  .dtile b{display:block;font-size:1.35rem;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .dtile span{font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+  .rinfo{flex:1;min-width:220px}
+  .nx{font-size:.56rem;font-weight:800;letter-spacing:.12em;color:var(--amber);display:inline-flex;align-items:center;gap:5px;margin-bottom:3px}
+  .nx .pdot{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:ping 1.8s infinite}
+  .rtitle{font-size:1rem;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+  .rtitle .em{margin-right:6px}
+  .rsub{font-size:.78rem;color:var(--muted);margin-top:3px;line-height:1.45}
+  .rsub .ttag-mini{color:var(--c);font-weight:700}
+  .rstatus{flex:none;min-width:92px;text-align:right;margin-left:auto}
+  .away{font-size:.7rem;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap}
+  .away.soon{background:rgba(52,211,153,.14);color:var(--emerald)}
+  .away.now{background:rgba(251,191,36,.16);color:var(--amber)}
+  .away.past{background:var(--surface-2);color:var(--faint)}
+  .cd-mini{color:var(--amber);font-weight:700;font-variant-numeric:tabular-nums;font-size:.9rem}
+  .ract{flex:none;display:flex;gap:5px;align-items:center}
+  .sbtn{width:32px;height:32px;border-radius:9px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);
+    cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;text-decoration:none;font-family:inherit;transition:all .12s}
+  .sbtn:hover{color:var(--indigo);border-color:var(--indigo)}
+  .sbtn.on{color:var(--amber);border-color:var(--amber);background:rgba(251,191,36,.12)}
+  .chev{transition:transform .22s;display:inline-block;font-size:.75rem}
+  .row.expanded .chev{transform:rotate(180deg)}
+
+  /* Expanded detail */
+  .row-more{flex-basis:100%;display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s ease}
+  .row.expanded .row-more{grid-template-rows:1fr}
+  .row-more-in{overflow:hidden;min-height:0}
+  .desc{font-size:.88rem;color:#c7d0e6;margin-top:14px}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+  .facts>div{background:var(--surface-2);border:1px solid var(--border);border-radius:11px;padding:8px 11px}
+  .facts span{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:2px}
+  .facts b{font-size:.82rem;font-weight:650}
+  .tags{margin-top:13px;display:flex;flex-wrap:wrap;gap:7px}
+  .tag{font-size:.7rem;background:var(--surface-2);color:var(--muted);padding:3px 10px;border-radius:999px;border:1px solid var(--border)}
+  .ttag{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;color:var(--c);background:var(--surface-2);border:1px solid var(--c)}
+  .more-actions{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .cal-row{margin-top:11px;font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .cal-row a,.cal-row button{color:var(--indigo);text-decoration:none;font-weight:650;font-size:.76rem;background:none;border:none;cursor:pointer;font-family:inherit;padding:0}
+  .cal-row a:hover,.cal-row button:hover{color:var(--indigo-2)}
+  .cal-row .sep{color:var(--faint)}
+
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg-0);
+    font-weight:700;font-size:.85rem;padding:11px 20px;border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;z-index:80;transition:opacity .2s,transform .2s}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .empty{padding:40px 10px;text-align:center;color:var(--muted)}
+  .empty b{color:var(--ink)}
+
+  footer{margin-top:50px;color:var(--faint);font-size:.8rem;text-align:center;border-top:1px solid var(--border);padding-top:26px;line-height:1.9}
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--ink)}
+
+  @media print{
+    body{background:#fff!important;color:#000}
+    .sticky,.bar-actions,.stats,.eyebrow,.ract,.cal-row,.more-actions,.toast,footer,.rstatus{display:none!important}
+    .wrap{padding:0;max-width:none}
+    h1{color:#000} h1 .grad{-webkit-text-fill-color:#000;color:#000}
+    .row{break-inside:avoid;border:1px solid #bbb!important;box-shadow:none!important;background:#fff!important;animation:none!important}
+    .rtitle,.section-label{color:#000} .rsub,.desc,.tag,.facts span,.facts b{color:#333!important}
+    .row-more{grid-template-rows:1fr!important} .row-more-in{overflow:visible!important}
+    .facts>div{background:#fff!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">
+      <span class="flag"><span style="background:#002b7f"></span><span style="background:#fcd116"></span><span style="background:#ce1126"></span></span>
+      Romania · Tech Calendar 2026
+    </div>
+    <h1>Upcoming Tech Events <span class="grad">in Romania</span></h1>
+    <p class="sub">Major conferences, hackathons and summits — each row expands for full details. Save your shortlist, sync to your calendar, and share any filtered view.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="sticky" id="sticky">
+    <div class="toolbar">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" type="text" placeholder="Search events, topics or cities…  ( / )" autocomplete="off" aria-label="Search events">
+        <button class="clr" id="searchClr" aria-label="Clear search">✕</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="winOnly"><span class="switch"></span><span class="tlabel">Next 30 days</span></label>
+      <label class="toggle"><input type="checkbox" id="favOnly"><span class="switch"></span><span class="tlabel" id="favlabel">★ Saved</span></label>
+      <button class="fchip" id="clear" style="display:none">✕ Clear</button>
+    </div>
+    <div class="chips" id="cityChips"><span class="chip-label">City</span></div>
+    <div class="chips" id="typeChips"><span class="chip-label">Type</span></div>
+  </div>
+
+  <div class="bar-actions">
+    <span class="hint" id="resultHint"></span>
+    <button class="miniact" id="expandAll">⤢ Expand all</button>
+    <button class="miniact" id="dlsaved" style="display:none">★ Saved (.ics)</button>
+    <button class="miniact" id="dlall">⤓ All (.ics)</button>
+    <button class="miniact" id="copylink">🔗 Copy link</button>
+    <button class="miniact" id="printbtn">🖨 Print</button>
+  </div>
+
+  <div class="section-label" id="lbl-win">Next 30 days <span class="ct" id="ct-win"></span></div>
+  <div class="list" id="list-win"></div>
+
+  <div class="section-label" id="lbl-other">Later in 2026 <span class="ct" id="ct-other"></span></div>
+  <div class="list" id="list-other"></div>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    Compiled June 2, 2026 — always confirm dates on the official event sites before booking travel.<br>
+    Sources:
+    <a href="https://www.devtalks.ro/" target="_blank" rel="noopener">DevTalks</a> ·
+    <a href="https://dev-play.ro/" target="_blank" rel="noopener">Dev.Play</a> ·
+    <a href="https://www.techweek.ro/" target="_blank" rel="noopener">Bucharest Tech Week</a> ·
+    <a href="https://techsylvania.com/" target="_blank" rel="noopener">Techsylvania</a> ·
+    <a href="https://hacktm.ro/" target="_blank" rel="noopener">HackTM</a> ·
+    <a href="https://jsheroes.io/" target="_blank" rel="noopener">JSHeroes</a> ·
+    <a href="https://romaniancreativeweek.ro/en/" target="_blank" rel="noopener">Creative Week</a> ·
+    <a href="https://iccp.ro/iccp2026/" target="_blank" rel="noopener">ICCP</a> ·
+    <a href="https://icstcc.org/2026/" target="_blank" rel="noopener">ICSTCC</a> ·
+    <a href="https://dev.events/EU/RO/tech" target="_blank" rel="noopener">dev.events</a>
+  </footer>
+</div>
+
+<script>
+const NOW=new Date();
+const TODAY=new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate());
+const WINDOW_END=new Date(TODAY); WINDOW_END.setDate(WINDOW_END.getDate()+30);
+const DAY=86400000;
+
+const events=[
+  { short:"IE 2026", name:"IE 2026 — Informatics in Economy", start:"2026-05-07", end:"2026-05-09",
+    city:"Bucharest", venue:"Bucharest University of Economic Studies (ASE)",
+    desc:"24th International Conference — Education, Research & Business Technologies. Academic IT & economics research with peer-reviewed sessions.",
+    tags:["Academic","Research","Informatics"], url:"https://www.conferenceie.ase.ro/" },
+  { short:"HackTM 2026", name:"HackTM 2026", start:"2026-05-11", end:"2026-05-16",
+    city:"Timișoara", venue:"FABER & partner coworking spaces",
+    desc:"Six-day hackathon with three tracks — Artificial Intelligence, Product Innovation and Defense Technologies. €6,000 total prize pool.",
+    tags:["Hackathon","AI","Defense Tech"], url:"https://hacktm.ro/" },
+  { short:"Romanian Creative Week", name:"Romanian Creative Week 2026", start:"2026-05-13", end:"2026-05-24",
+    city:"Iași", venue:"Citywide",
+    desc:"700+ events across the creative & tech industries, including the Creativity Conferences and the UniCredit Fintech Hackathon.",
+    tags:["Creative Tech","Fintech","Conferences"], url:"https://romaniancreativeweek.ro/en/" },
+  { short:"JSHeroes 2026", name:"JSHeroes 2026", start:"2026-05-14", end:"2026-05-15",
+    city:"Cluj-Napoca", venue:"Grand Hotel Italia",
+    desc:"Community-organized JavaScript conference — one of the most respected front-end and web engineering events in the region.",
+    tags:["JavaScript","Front-end","Web"], url:"https://jsheroes.io/" },
+  { short:"DIGIT-ABLE", name:"DIGIT-ABLE Hackathon", start:"2026-05-18", end:"2026-05-18",
+    city:"Iași", venue:"AGORA Center",
+    desc:"Social-impact hackathon combining social economy with digitalization and innovation.",
+    tags:["Hackathon","Social Impact"], url:"https://hackathon.alaturidevoi.ro/" },
+
+  { short:"DevTalks Romania", name:"DevTalks Romania 2026", start:"2026-06-03", end:"2026-06-04",
+    city:"Bucharest", venue:"Romexpo",
+    desc:"The largest tech conference for developers, AI innovators & tech decision-makers in Central & Eastern Europe — 10,000+ attendees across multiple stages.",
+    tags:["AI","Cloud","DevOps","Cybersecurity"], url:"https://www.devtalks.ro/" },
+  { short:"Dev.Play 2026", name:"Dev.Play 2026", start:"2026-06-08", end:"2026-06-09",
+    city:"Bucharest", venue:"Downtown Bucharest",
+    desc:"Romania's leading game-development conference — indie, AAA, mobile and fundraising tracks bringing together studios, publishers and investors.",
+    tags:["Game Dev","Design","Publishing"], url:"https://dev-play.ro/" },
+  { short:"Bucharest Tech Week", name:"Bucharest Tech Week — Business Summits", start:"2026-06-15", end:"2026-06-19",
+    city:"Bucharest", venue:"Nord Events Center by Globalworth",
+    desc:"Five specialized summits: Innovation, Future AI, HR Masters, Software Architecture & AI Coding. Generative AI, AI agents and multi-cloud.",
+    tags:["Generative AI","AI Agents","Architecture"], url:"https://www.techweek.ro/" },
+  { short:"Techsylvania 2026", name:"Techsylvania 2026", start:"2026-06-24", end:"2026-06-25",
+    city:"Cluj-Napoca", venue:"Cluj Innovation Park",
+    desc:"Eastern Europe's leading tech & startup event — 2,000+ founders, investors and executives from 30+ countries across Center & Impact stages.",
+    tags:["Startups","Venture","Leadership"], url:"https://techsylvania.com/" },
+
+  { short:"ECAI 2026", name:"ECAI 2026", start:"2026-07-02", end:"2026-07-03",
+    city:"Pitești", venue:"National University of Science and Technology",
+    desc:"International Conference on Electronics, Computers and Artificial Intelligence — academic engineering & AI research.",
+    tags:["Academic","AI","Electronics"], url:"https://10times.com/ecai-bucharest" },
+
+  { short:"ICSTCC 2026", name:"ICSTCC 2026 — System Theory, Control & Computing", start:"2026-10-21", end:"2026-10-24",
+    city:"Iași", venue:"IEEE Romania",
+    desc:"30th International Conference on System Theory, Control and Computing — IEEE-sponsored academic conference.",
+    tags:["Academic","Control","IEEE"], url:"https://icstcc.org/2026/" },
+  { short:"ICCP 2026", name:"ICCP 2026 — Intelligent Computer Communication", start:"2026-10-22", end:"2026-10-24",
+    city:"Cluj-Napoca", venue:"IEEE",
+    desc:"22nd IEEE International Conference on Intelligent Computer Communication and Processing.",
+    tags:["Academic","AI","IEEE"], url:"https://iccp.ro/iccp2026/" },
+
+  { short:"DevTalks Cluj 2026", name:"DevTalks Cluj-Napoca 2026", start:"2026-08-25", end:"2026-08-25",
+    city:"Cluj-Napoca", venue:"Cluj-Napoca",
+    desc:"Regional edition of DevTalks bringing developers, AI innovators and tech leaders together in Transylvania's tech capital.",
+    tags:["AI","Cloud","DevOps"], url:"https://www.devtalks.ro/" },
+  { short:"devdays 2026", name:"devdays 2026", start:"2026-09-21", end:"2026-09-23",
+    city:"Iași", venue:"Iași",
+    desc:"Long-running developer conference in Iași — software craftsmanship, architecture and engineering practices.",
+    tags:["Software","Architecture","Web"], url:"https://dev.events/EU/RO/tech" },
+  { short:"Product Circle — Builders", name:"Product Circle — Builders (Bucharest)", start:"2026-10-03", end:"2026-10-03",
+    city:"Bucharest", venue:"Bucharest",
+    desc:"Community event for product builders — product management, discovery and growth.",
+    tags:["Product","Design","Growth"], url:"https://dev.events/EU/RO/tech" },
+  { short:"How to Web 2026", name:"How to Web 2026", start:"2026-10-06", end:"2026-10-08",
+    city:"Bucharest", venue:"Face Convention Center",
+    desc:"One of Central & Eastern Europe's most influential startup & tech conferences — founders, investors, product and AI leaders.",
+    tags:["Startups","Venture","Product","AI"], url:"https://www.howtoweb.co/" },
+  { short:"OmniOpenCon 2026", name:"OmniOpenCon 2026", start:"2026-10-17", end:"2026-10-19",
+    city:"Bucharest", venue:"Bucharest",
+    desc:"Open-source, open-data and open-knowledge community conference.",
+    tags:["Open Source","Community","Linux"], url:"https://dev.events/EU/RO/tech" },
+  { short:"Prow 2026", name:"Prow 2026", start:"2026-10-30", end:"2026-10-30",
+    city:"Timișoara", venue:"Timișoara",
+    desc:"Product & engineering conference in Timișoara.",
+    tags:["Product","Engineering"], url:"https://dev.events/EU/RO/tech" },
+  { short:"Product Circle — Cluj", name:"Product Circle — Builders (Cluj-Napoca)", start:"2026-11-07", end:"2026-11-07",
+    city:"Cluj-Napoca", venue:"Cluj-Napoca",
+    desc:"Cluj edition of the Product Circle community event for product builders.",
+    tags:["Product","Design","Growth"], url:"https://dev.events/EU/RO/tech" },
+  { short:"GoTech World 2026", name:"GoTech World 2026", start:"2026-11-10", end:"2026-11-11",
+    city:"Bucharest", venue:"Romexpo",
+    desc:"The largest B2B IT & digital business expo-conference in CEE (formerly Internet & Mobile World) — cloud, AI, e-commerce and digital transformation.",
+    tags:["IT","Cloud","AI","Digital"], url:"https://www.gotech.world/" },
+  { short:"DefCamp 2026", name:"DefCamp 2026", start:"2026-11-19", end:"2026-11-20",
+    city:"Bucharest", venue:"Bucharest",
+    desc:"The leading hacking & cybersecurity conference in Central & Eastern Europe — offensive security, research and live hacking village.",
+    tags:["Cybersecurity","Hacking","InfoSec"], url:"https://def.camp/" },
+
+  { short:"SYNASC 2026", name:"SYNASC 2026 — Symbolic & Numeric Algorithms", start:"2026-09-14", end:"2026-09-17",
+    city:"Timișoara", venue:"West University of Timișoara",
+    desc:"International Symposium on Symbolic and Numeric Algorithms for Scientific Computing — academic research in computing & HPC.",
+    tags:["Academic","Algorithms","HPC"], url:"https://synasc.ro/2026/" },
+  { short:"IT Days 2026", name:"IT Days 2026", start:"2026-11-11", end:"2026-11-12",
+    city:"Cluj-Napoca", venue:"Cluj-Napoca",
+    desc:"Annual IT conference in Cluj covering software development, cloud, AI, architecture and IT management.",
+    tags:["Software","Cloud","AI","Management"], url:"https://www.itdays.ro/" }
+];
+
+const TYPES=['Academic','Hackathon','Festival','Conference','Hackathon','Conference','Conference','Conference','Conference','Academic','Academic','Academic',
+  'Conference','Conference','Conference','Conference','Conference','Conference','Conference','Conference','Conference',
+  'Academic','Conference'];
+const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);};
+const fmtMonth=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmt=e=>{const sm=fmtMonth[e.s.getMonth()],em=fmtMonth[e.e.getMonth()];
+  if(e.start===e.end)return `${sm} ${e.s.getDate()}`;
+  if(sm===em)return `${sm} ${e.s.getDate()}–${e.e.getDate()}`;
+  return `${sm} ${e.s.getDate()} – ${em} ${e.e.getDate()}`;};
+events.forEach((e,i)=>{e.id="ev"+i;e.s=parse(e.start);e.e=parse(e.end);e.type=TYPES[i];e.win=e.e>=TODAY&&e.s<=WINDOW_END;});
+const LIVE=events.filter(e=>e.e>=TODAY);   // upcoming only — drop events that have already ended
+
+const TYPEMETA={Conference:{emoji:'🎤',c:'#a78bfa'},Hackathon:{emoji:'⚡',c:'#fb923c'},Academic:{emoji:'🎓',c:'#38bdf8'},Festival:{emoji:'🎨',c:'#34d399'}};
+const tmeta=e=>TYPEMETA[e.type]||{emoji:'🎟',c:'#9aa6c4'};
+
+function dayInfo(e){ if(e.e<TODAY)return{t:'Passed',cls:'past'};
+  if(e.s<=TODAY&&e.e>=TODAY)return{t:'Happening now',cls:'now'};
+  const days=Math.round((e.s-TODAY)/DAY); return{t:days===0?'Today':days===1?'Tomorrow':'in '+days+' days',cls:'soon'}; }
+
+/* stats */
+(function(){const mc={};LIVE.forEach(e=>{mc[e.s.getMonth()]=(mc[e.s.getMonth()]||0)+1;});
+  let bm=-1,bn=0;for(const k in mc){if(mc[k]>bn){bn=mc[k];bm=+k;}}
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><b>${LIVE.length}</b><span>Upcoming</span></div>
+    <div class="stat"><b>${new Set(LIVE.map(e=>e.city)).size}</b><span>Cities</span></div>
+    <div class="stat"><b>${LIVE.filter(e=>e.win).length}</b><span>Next 30 days</span></div>
+    <div class="stat"><b>${fmtMonth[bm]} · ${bn}</b><span>Busiest month</span></div>`;})();
+
+/* calendar links + export */
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const esc=s=>String(s).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');
+function gcal(e){const p=new URLSearchParams({action:'TEMPLATE',text:e.name,dates:`${ymd(e.s)}/${ymd(new Date(e.e.getTime()+DAY))}`,details:e.desc+'\n\n'+e.url,location:e.city+', Romania'});return 'https://www.google.com/calendar/render?'+p.toString();}
+function outlook(e){const p=new URLSearchParams({path:'/calendar/action/compose',rru:'addevent',subject:e.name,startdt:iso(e.s),enddt:iso(new Date(e.e.getTime()+DAY)),allday:'true',body:e.desc+'\n'+e.url,location:e.city+', Romania'});return 'https://outlook.live.com/calendar/0/deeplink/compose?'+p.toString();}
+function maps(e){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((e.venue?e.venue+', ':'')+e.city+', Romania');}
+function icsText(list){const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//RO Tech Events 2026//EN','CALSCALE:GREGORIAN'];
+  list.forEach(e=>{L.push('BEGIN:VEVENT','UID:'+e.id+'@ro-tech-2026','DTSTART;VALUE=DATE:'+ymd(e.s),'DTEND;VALUE=DATE:'+ymd(new Date(e.e.getTime()+DAY)),'SUMMARY:'+esc(e.name),'LOCATION:'+esc(e.city+', Romania'),'DESCRIPTION:'+esc(e.desc+' '+e.url),'END:VEVENT');});
+  L.push('END:VCALENDAR');return L.join('\r\n');}
+function downloadICS(list,filename){const blob=new Blob([icsText(list)],{type:'text/calendar'});const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+let toastT; function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),1900);}
+function share(e){const txt=`${e.name} — ${fmt(e)}, ${e.city} — ${e.url}`;
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>toast('Event link copied')).catch(()=>toast(txt));else toast(txt);}
+
+/* favorites */
+let favs=[];try{favs=JSON.parse(localStorage.getItem('roTechFavs')||'[]');}catch(_){}
+const isFav=id=>favs.includes(id);
+function toggleFav(id){favs=isFav(id)?favs.filter(x=>x!==id):[...favs,id];try{localStorage.setItem('roTechFavs',JSON.stringify(favs));}catch(_){}
+  document.getElementById('favlabel').textContent='★ Saved'+(favs.length?' ('+favs.length+')':'');}
+
+/* filters */
+let activeCity='All',activeType='All',q='',winOnly=false,favOnly=false;
+const cityBox=document.getElementById('cityChips'),typeBox=document.getElementById('typeChips');
+['All',...[...new Set(LIVE.map(e=>e.city))]].forEach(c=>{const b=document.createElement('button');
+  b.className='fchip'+(c==='All'?' on':'');b.textContent=c;b.dataset.city=c;
+  b.addEventListener('click',()=>{activeCity=c;cityBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.city===c));render();});cityBox.appendChild(b);});
+['All',...[...new Set(LIVE.map(e=>e.type))]].forEach(t=>{const b=document.createElement('button');
+  b.className='fchip'+(t==='All'?' on':'');b.textContent=t;b.dataset.type=t;
+  b.addEventListener('click',()=>{activeType=t;typeBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.type===t));render();});typeBox.appendChild(b);});
+const searchEl=document.getElementById('search');
+searchEl.addEventListener('input',e=>{q=e.target.value.trim();render();});
+document.getElementById('searchClr').addEventListener('click',()=>{searchEl.value='';q='';searchEl.focus();render();});
+document.getElementById('winOnly').addEventListener('change',e=>{winOnly=e.target.checked;render();});
+document.getElementById('favOnly').addEventListener('change',e=>{favOnly=e.target.checked;render();});
+document.getElementById('dlall').addEventListener('click',()=>{downloadICS(filtered(),'romania-tech-events-2026.ics');toast('Events downloaded (.ics)');});
+document.getElementById('dlsaved').addEventListener('click',()=>{const s=events.filter(e=>isFav(e.id));if(s.length){downloadICS(s,'my-romania-tech-agenda.ics');toast('Your saved agenda downloaded');}});
+document.getElementById('copylink').addEventListener('click',()=>{if(navigator.clipboard&&navigator.clipboard.writeText)
+  navigator.clipboard.writeText(location.href).then(()=>toast('Link to this view copied')).catch(()=>toast('Copy the address-bar URL'));else toast('Copy the address-bar URL');});
+document.getElementById('printbtn').addEventListener('click',()=>window.print());
+let allOpen=false;
+document.getElementById('expandAll').addEventListener('click',()=>{allOpen=!allOpen;
+  document.querySelectorAll('.row').forEach(r=>r.classList.toggle('expanded',allOpen));
+  document.getElementById('expandAll').textContent=allOpen?'⤡ Collapse all':'⤢ Expand all';});
+document.getElementById('clear').addEventListener('click',()=>{q='';winOnly=false;favOnly=false;activeCity='All';activeType='All';
+  searchEl.value='';document.getElementById('winOnly').checked=false;document.getElementById('favOnly').checked=false;
+  cityBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.city==='All'));
+  typeBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.type==='All'));render();});
+
+function anyFilter(){return !!(q||winOnly||favOnly||activeCity!=='All'||activeType!=='All');}
+function filtered(){return LIVE.filter(e=>{
+  if(winOnly&&!e.win)return false; if(favOnly&&!isFav(e.id))return false;
+  if(activeCity!=='All'&&e.city!==activeCity)return false; if(activeType!=='All'&&e.type!==activeType)return false;
+  if(q){const hay=(e.name+' '+e.city+' '+e.type+' '+e.desc+' '+e.tags.join(' ')).toLowerCase();if(!hay.includes(q.toLowerCase()))return false;}
+  return true;}).sort((a,b)=>a.s-b.s);}
+
+/* URL state */
+function readHash(){const p=new URLSearchParams(location.hash.replace(/^#/,''));
+  q=p.get('q')||'';activeCity=p.get('city')||'All';activeType=p.get('type')||'All';winOnly=p.get('win')==='1';favOnly=p.get('fav')==='1';}
+function writeHash(){const p=new URLSearchParams();
+  if(q)p.set('q',q);if(activeCity!=='All')p.set('city',activeCity);if(activeType!=='All')p.set('type',activeType);
+  if(winOnly)p.set('win','1');if(favOnly)p.set('fav','1');const s=p.toString();
+  try{history.replaceState(null,'',s?('#'+s):location.pathname+location.search);}catch(_){}}
+function syncControls(){searchEl.value=q;document.getElementById('winOnly').checked=winOnly;document.getElementById('favOnly').checked=favOnly;
+  cityBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.city===activeCity));
+  typeBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.type===activeType));}
+function updateSavedBtn(){const b=document.getElementById('dlsaved');b.style.display=favs.length?'inline-flex':'none';b.textContent='★ Saved (.ics) · '+favs.length;}
+
+/* next upcoming (for live countdown) */
+const nextEv=events.filter(e=>e.e>=TODAY).sort((a,b)=>a.s-b.s)[0];
+const nextId=nextEv?nextEv.id:null;
+
+function rowEl(e){
+  const di=dayInfo(e),m=tmeta(e),dur=Math.round((e.e-e.s)/DAY)+1,isNext=e.id===nextId;
+  const status=isNext?`<span class="cd-mini" id="cd-mini">…</span>`:`<span class="away ${di.cls}">${di.t}</span>`;
+  const r=document.createElement('article');
+  r.className='row '+(e.win?'win':'other')+(isNext?' next':'')+(allOpen?' expanded':'');
+  r.id='row-'+e.id; r.tabIndex=0; r.setAttribute('aria-label',e.name+', '+fmt(e)+', '+e.city);
+  r.innerHTML=`
+    <div class="dtile"><b>${pad(e.s.getDate())}</b><span>${fmtMonth[e.s.getMonth()]}</span></div>
+    <div class="rinfo">
+      ${isNext?'<div class="nx"><span class="pdot"></span> NEXT UP</div>':''}
+      <div class="rtitle"><span class="em">${m.emoji}</span>${e.name}</div>
+      <div class="rsub">📍 ${e.city}${e.venue?' · '+e.venue:''} &nbsp;·&nbsp; 🗓 ${fmt(e)} &nbsp;·&nbsp; <span class="ttag-mini" style="--c:${m.c}">${e.type}</span></div>
+    </div>
+    <div class="rstatus">${status}</div>
+    <div class="ract">
+      <button class="sbtn${isFav(e.id)?' on':''}" data-act="fav" aria-label="Save event">${isFav(e.id)?'★':'☆'}</button>
+      <a class="sbtn" href="${gcal(e)}" target="_blank" rel="noopener" aria-label="Add to Google Calendar">＋</a>
+      <a class="sbtn" href="${e.url}" target="_blank" rel="noopener" aria-label="Event website">↗</a>
+      <button class="sbtn" data-act="toggle" aria-label="More details"><span class="chev">▾</span></button>
+    </div>
+    <div class="row-more"><div class="row-more-in">
+      <div class="desc">${e.desc}</div>
+      <div class="facts">
+        <div><span>When</span><b>${fmt(e)}, 2026</b></div>
+        <div><span>Duration</span><b>${dur} day${dur>1?'s':''}</b></div>
+        <div><span>Where</span><b>${e.venue?e.venue+' · ':''}${e.city}</b></div>
+        <div><span>Category</span><b>${m.emoji} ${e.type}</b></div>
+      </div>
+      <div class="tags"><span class="ttag" style="--c:${m.c}">${m.emoji} ${e.type}</span>${e.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="more-actions">
+        <a class="miniact" href="${e.url}" target="_blank" rel="noopener">🌐 Website</a>
+        <a class="miniact" href="${maps(e)}" target="_blank" rel="noopener">📍 Directions</a>
+        <button class="miniact" data-act="share">↗ Share</button>
+      </div>
+      <div class="cal-row">Add to calendar:
+        <a href="${gcal(e)}" target="_blank" rel="noopener">Google</a><span class="sep">·</span>
+        <a href="${outlook(e)}" target="_blank" rel="noopener">Outlook</a><span class="sep">·</span>
+        <button data-act="ics">.ics</button>
+      </div>
+    </div></div>`;
+  r.querySelector('[data-act="fav"]').addEventListener('click',ev=>{ev.stopPropagation();toggleFav(e.id);toast(isFav(e.id)?'Saved to your list':'Removed from your list');render();});
+  r.querySelector('[data-act="share"]').addEventListener('click',ev=>{ev.stopPropagation();share(e);});
+  r.querySelector('[data-act="ics"]').addEventListener('click',ev=>{ev.stopPropagation();downloadICS([e],e.short.replace(/\W+/g,'-')+'.ics');toast('Calendar file downloaded');});
+  r.addEventListener('click',ev=>{ if(ev.target.closest('a'))return; if(ev.target.closest('[data-act="fav"],[data-act="share"],[data-act="ics"]'))return; r.classList.toggle('expanded'); });
+  r.addEventListener('keydown',ev=>{ if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();r.classList.toggle('expanded');} });
+  return r;
+}
+
+const winEl=document.getElementById('list-win'),otherEl=document.getElementById('list-other');
+function render(){
+  const list=filtered();
+  document.getElementById('searchClr').style.display=q?'flex':'none';
+  document.getElementById('clear').style.display=anyFilter()?'inline-flex':'none';
+  document.getElementById('resultHint').textContent=`${list.length} event${list.length!==1?'s':''}${anyFilter()?' match your filters':''}`;
+  updateSavedBtn(); writeHash();
+  winEl.innerHTML=''; otherEl.innerHTML='';
+  const win=list.filter(e=>e.win), other=list.filter(e=>!e.win);
+  win.forEach((e,i)=>{const el=rowEl(e);el.style.animationDelay=(i*40)+'ms';winEl.appendChild(el);});
+  let cur=null,j=0;
+  other.forEach(e=>{const mk=e.s.getFullYear()+'-'+e.s.getMonth();
+    if(mk!==cur){cur=mk;const sep=document.createElement('div');sep.className='month-sep';sep.textContent=fmtMonth[e.s.getMonth()]+' '+e.s.getFullYear();otherEl.appendChild(sep);}
+    const el=rowEl(e);el.style.animationDelay=(j++*40)+'ms';otherEl.appendChild(el);});
+  document.getElementById('ct-win').textContent=win.length;
+  document.getElementById('ct-other').textContent=other.length;
+  document.getElementById('lbl-win').style.display=win.length?'flex':'none';
+  document.getElementById('lbl-other').style.display=other.length?'flex':'none';
+  if(!list.length){winEl.innerHTML='<div class="empty">No events match your filters. <b>Clear filters</b> or pick “All”.</div>';
+    document.getElementById('lbl-win').style.display='flex';document.getElementById('ct-win').textContent=0;}
+}
+
+function tickMini(){const el=document.getElementById('cd-mini');if(!el||!nextEv)return;
+  const now=new Date(),diff=nextEv.s-now;
+  if(now>=nextEv.s&&now<=new Date(nextEv.e.getTime()+DAY)){el.textContent='happening now';return;}
+  if(diff<0){el.textContent='ended';return;}
+  const d=Math.floor(diff/DAY),h=Math.floor(diff%DAY/3600000),mm=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+  el.textContent='in '+(d?d+'d ':'')+pad(h)+':'+pad(mm)+':'+pad(s);}
+
+/* keyboard */
+addEventListener('keydown',e=>{const tag=(document.activeElement&&document.activeElement.tagName)||'';
+  if(e.key==='/'&&document.activeElement!==searchEl&&!/INPUT|TEXTAREA/.test(tag)){e.preventDefault();searchEl.focus();}
+  else if(e.key==='Escape'&&document.activeElement===searchEl){searchEl.value='';q='';render();searchEl.blur();}});
+const sticky=document.getElementById('sticky');
+addEventListener('scroll',()=>sticky.classList.toggle('stuck',sticky.getBoundingClientRect().top<=0),{passive:true});
+
+document.getElementById('favlabel').textContent='★ Saved'+(favs.length?' ('+favs.length+')':'');
+readHash(); syncControls();
+render();
+setInterval(tickMini,1000);
+</script>
+</body>
+</html>
