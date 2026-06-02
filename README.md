@@ -2,7 +2,7 @@
 
 A single-page, dependency-free website listing the major upcoming **technology events in Romania** in 2026 — conferences, hackathons and summits.
 
-🔗 **Live site:** _(GitHub Pages link added after deploy)_
+🔗 **Live site:** https://danlex.github.io/romania-tech-events-2026/
 
 ## Features
 
