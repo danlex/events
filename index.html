@@ -69,6 +69,13 @@
   .fchip:hover{color:var(--ink);border-color:var(--surface-2)}
   .fchip.on{background:var(--ink);color:var(--bg-0);border-color:var(--ink)}
   #clear{color:var(--amber);border-color:rgba(251,191,36,.4)}
+  .sel{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;height:42px;padding:0 4px 0 13px}
+  .sel:focus-within{border-color:var(--indigo)}
+  .sel>span{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+  .sel select{background:transparent;border:none;color:var(--ink);font-family:inherit;font-size:.86rem;
+    font-weight:600;padding:8px 6px;outline:none;cursor:pointer}
+  .sel select option{background:var(--bg-1);color:var(--ink)}
 
   /* Section labels */
   .bar-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:8px 0 4px}
@@ -181,12 +188,12 @@
         <input id="search" type="text" placeholder="Search events, topics or cities…  ( / )" autocomplete="off" aria-label="Search events">
         <button class="clr" id="searchClr" aria-label="Clear search">✕</button>
       </div>
+      <div class="sel"><span>City</span><select id="citySel" aria-label="Filter by city"></select></div>
+      <div class="sel"><span>Type</span><select id="typeSel" aria-label="Filter by type"></select></div>
       <label class="toggle"><input type="checkbox" id="winOnly"><span class="switch"></span><span class="tlabel">Next 30 days</span></label>
       <label class="toggle"><input type="checkbox" id="favOnly"><span class="switch"></span><span class="tlabel" id="favlabel">★ Saved</span></label>
       <button class="fchip" id="clear" style="display:none">✕ Clear</button>
     </div>
-    <div class="chips" id="cityChips"><span class="chip-label">City</span></div>
-    <div class="chips" id="typeChips"><span class="chip-label">Type</span></div>
   </div>
 
   <div class="bar-actions">
@@ -381,13 +388,12 @@ function toggleFav(id){favs=isFav(id)?favs.filter(x=>x!==id):[...favs,id];try{lo
 
 /* filters */
 let activeCity='All',activeType='All',q='',winOnly=false,favOnly=false;
-const cityBox=document.getElementById('cityChips'),typeBox=document.getElementById('typeChips');
-['All',...[...new Set(LIVE.map(e=>e.city))]].forEach(c=>{const b=document.createElement('button');
-  b.className='fchip'+(c==='All'?' on':'');b.textContent=c;b.dataset.city=c;
-  b.addEventListener('click',()=>{activeCity=c;cityBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.city===c));render();});cityBox.appendChild(b);});
-['All',...[...new Set(LIVE.map(e=>e.type))]].forEach(t=>{const b=document.createElement('button');
-  b.className='fchip'+(t==='All'?' on':'');b.textContent=t;b.dataset.type=t;
-  b.addEventListener('click',()=>{activeType=t;typeBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.type===t));render();});typeBox.appendChild(b);});
+const citySel=document.getElementById('citySel'),typeSel=document.getElementById('typeSel');
+const fillSel=(sel,vals)=>{sel.innerHTML=vals.map(v=>`<option value="${v}">${v}</option>`).join('');};
+fillSel(citySel,['All',...[...new Set(LIVE.map(e=>e.city))]]);
+fillSel(typeSel,['All',...[...new Set(LIVE.map(e=>e.type))]]);
+citySel.addEventListener('change',e=>{activeCity=e.target.value;render();});
+typeSel.addEventListener('change',e=>{activeType=e.target.value;render();});
 const searchEl=document.getElementById('search');
 searchEl.addEventListener('input',e=>{q=e.target.value.trim();render();});
 document.getElementById('searchClr').addEventListener('click',()=>{searchEl.value='';q='';searchEl.focus();render();});
@@ -404,8 +410,7 @@ document.getElementById('expandAll').addEventListener('click',()=>{allOpen=!allO
   document.getElementById('expandAll').textContent=allOpen?'⤡ Collapse all':'⤢ Expand all';});
 document.getElementById('clear').addEventListener('click',()=>{q='';winOnly=false;favOnly=false;activeCity='All';activeType='All';
   searchEl.value='';document.getElementById('winOnly').checked=false;document.getElementById('favOnly').checked=false;
-  cityBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.city==='All'));
-  typeBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.type==='All'));render();});
+  citySel.value='All';typeSel.value='All';render();});
 
 function anyFilter(){return !!(q||winOnly||favOnly||activeCity!=='All'||activeType!=='All');}
 function filtered(){return LIVE.filter(e=>{
@@ -422,8 +427,7 @@ function writeHash(){const p=new URLSearchParams();
   if(winOnly)p.set('win','1');if(favOnly)p.set('fav','1');const s=p.toString();
   try{history.replaceState(null,'',s?('#'+s):location.pathname+location.search);}catch(_){}}
 function syncControls(){searchEl.value=q;document.getElementById('winOnly').checked=winOnly;document.getElementById('favOnly').checked=favOnly;
-  cityBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.city===activeCity));
-  typeBox.querySelectorAll('.fchip').forEach(x=>x.classList.toggle('on',x.dataset.type===activeType));}
+  citySel.value=activeCity;typeSel.value=activeType;}
 function updateSavedBtn(){const b=document.getElementById('dlsaved');b.style.display=favs.length?'inline-flex':'none';b.textContent='★ Saved (.ics) · '+favs.length;}
 
 /* next upcoming (for live countdown) */
