@@ -123,6 +123,8 @@
   .bar-legend i{display:inline-block;width:18px;height:7px;border-radius:4px;vertical-align:0;margin-right:4px}
   .bar-legend .lg-win{background:linear-gradient(90deg,var(--amber),var(--amber-2))}
   .bar-legend .lg-other{background:linear-gradient(90deg,var(--indigo),var(--indigo-2))}
+  .miniact.submit{background:linear-gradient(90deg,var(--amber),var(--amber-2));color:#0b1020;border-color:transparent;font-weight:700}
+  .miniact.submit:hover{filter:brightness(1.06);color:#0b1020;border-color:transparent}
   .miniact{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600;color:var(--ink);
     background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:6px 10px;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .12s}
   .miniact:hover{border-color:var(--indigo);color:var(--indigo)}
@@ -243,6 +245,7 @@
   <div class="bar-actions">
     <span class="hint" id="resultHint"></span>
     <span class="bar-legend"><span><i class="lg-win"></i>within 30 days</span><span><i class="lg-other"></i>later</span></span>
+    <a class="miniact submit" id="submit" href="https://github.com/danlex/events/issues/new?template=event-submission.yml" target="_blank" rel="noopener" title="Suggest an event — opens a quick GitHub form">➕ Submit an event</a>
     <button class="miniact" id="expandAll">⤢ Expand all</button>
     <a class="miniact" id="subscribe" href="webcal://events.alexandrudan.com/events.ics" title="Subscribe in your calendar app — stays in sync">🔔 Subscribe</a>
     <button class="miniact" id="dlsaved" style="display:none">★ Saved (.ics)</button>

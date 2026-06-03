@@ -1,0 +1,63 @@
+name: Submit a tech event
+description: Suggest an upcoming technology event in Romania to add to the calendar.
+title: "[Event] "
+labels: ["event-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an event! It will be reviewed and verified before being added.
+        Please use an **official event website** and **exact dates**.
+  - type: input
+    id: name
+    attributes:
+      label: Event name
+      placeholder: e.g. DevTalks Romania 2026
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Official website (URL)
+      placeholder: https://...
+    validations:
+      required: true
+  - type: input
+    id: start
+    attributes:
+      label: Start date (YYYY-MM-DD)
+      placeholder: "2026-09-15"
+    validations:
+      required: true
+  - type: input
+    id: end
+    attributes:
+      label: End date (YYYY-MM-DD) — same as start if one day
+      placeholder: "2026-09-16"
+    validations:
+      required: true
+  - type: input
+    id: city
+    attributes:
+      label: City
+      placeholder: Bucharest / Cluj-Napoca / Iași / Timișoara / Pitești / ...
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - Conference
+        - Hackathon
+        - Academic
+        - Festival
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: Short description (one factual sentence)
+      placeholder: What is it about, and who is it for?
+    validations:
+      required: false
